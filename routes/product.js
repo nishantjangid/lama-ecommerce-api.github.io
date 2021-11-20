@@ -33,22 +33,22 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
         await Product.findByIdAndDelete(req.params.id);
         res.status(200).json("User has been deleted..");
     }catch(err){
-        res.status(300).json(err);
+        res.status(500).json(err);
     }
 })
 
 // GET PRODUCT
-router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
+router.get("/find/:id", async (req, res) => {
     try{
         const product = await Product.findById(req.params.id);
         res.status(200).json(product);
     }catch(err){
-        res.status(300).json(err);
+        res.status(500).json(err);
     }
 })
 
 // GET ALL PRODUCTS
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
     const qNew = req.query.new;
     const qCategory = req.query.category;
 
